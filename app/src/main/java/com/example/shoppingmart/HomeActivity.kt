@@ -7,8 +7,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.navigation.findNavController
 import com.example.shoppingmart.databinding.ActivityHomeBinding
 import com.example.shoppingmart.loginsingup.LoginActivity
+import com.example.shoppingmart.loginsingup.profileActivity
+
 import com.google.firebase.auth.FirebaseAuth
 
 class HomeActivity : AppCompatActivity() {
@@ -31,34 +34,25 @@ class HomeActivity : AppCompatActivity() {
         auth=FirebaseAuth.getInstance()
 
 
-//        binding.button.setOnClickListener {
-//
-//            if (auth.currentUser != null) {
-//                auth.signOut()
-//                val intent = Intent(this, LoginActivity::class.java)
-//                startActivity(intent)
-//                finishAffinity()
-//            }
-//
-//        }
-
-
-
            binding.bottomNavigation.setOnItemSelectedListener { item ->
                when (item.itemId) {
                    R.id.home -> {
-                       // Switch to home fragment
+
+                       findNavController(R.id.nav_host_fragment).navigate(R.id.homeFragment)
                        true
                    }
                    R.id.favourite -> {
                        // Switch to dashboard fragment
                        true
                    } R.id.shopping -> {
-                   // Switch to dashboard fragment
+//                   startActivity(Intent(this, CardActivity::class.java))
+
+
                    true
                }
                    R.id.profile -> {
-                       // Switch to notifications fragment
+
+                       startActivity(Intent(this, profileActivity::class.java))
                        true
                    }
                    else -> false
@@ -73,4 +67,11 @@ class HomeActivity : AppCompatActivity() {
         finish()
         finishAffinity()
     }
+
+
+
+
+
+
+
 }

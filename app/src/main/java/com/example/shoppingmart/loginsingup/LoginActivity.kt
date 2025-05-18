@@ -52,22 +52,21 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "please Fill ALL The Details", Toast.LENGTH_SHORT).show()
             } else {
 
-                auth.signInWithEmailAndPassword(username, pasword)
-                    .addOnCompleteListener { task ->
+                auth.signInWithEmailAndPassword(username, pasword).addOnCompleteListener { task ->
 
-                        if (task.isSuccessful) {
-                            showSnackbar("Login successful", Snackbar.LENGTH_SHORT)
-                            startActivity(Intent(this, HomeActivity::class.java))
-                            finish()
+                    if (task.isSuccessful) {
+                        showSnackbar("Login successful", Snackbar.LENGTH_SHORT)
+                        startActivity(Intent(this, HomeActivity::class.java))
 
 
-
-                        } else {
-                            showSnackbar("Login failed: ${task.exception?.message}", Snackbar.LENGTH_LONG)
-                        }
-
-
+                    } else {
+                        showSnackbar(
+                            "Login failed: ${task.exception?.message}", Snackbar.LENGTH_LONG
+                        )
                     }
+
+
+                }
 
 
             }
@@ -77,20 +76,14 @@ class LoginActivity : AppCompatActivity() {
 
 
     }
+
     private fun showSnackbar(message: String, duration: Int = Snackbar.LENGTH_SHORT) {
         Snackbar.make(binding.root, message, duration).apply {
-            // Optional customization
             setAction("Dismiss") { dismiss() }
             setActionTextColor(getColor(R.color.red))
         }.show()
     }
 
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        finish()
-        finishAffinity()
-    }
 
     public override fun onStart() {
         super.onStart()
@@ -99,8 +92,8 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, HomeActivity::class.java))
 
 
-
         }
     }
+
 
 }
